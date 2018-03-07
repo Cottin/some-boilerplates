@@ -1,0 +1,28 @@
+{
+  "name": "some-boilerplates-react-hot-express",
+  "version": "1.0.0",
+  "description": "Boilerplate",
+  "scripts": {
+    "start:multientry": "WEBPACK_CONFIG=./webpack.config.multientry.js node server.js"
+  },
+  "author": "Victor Cottin <victor@wecodebetter.se> (http://www.wecodebetter.se/)",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "dotenv": "^5.0.1",
+    "express": "^4.12.3",
+    "morgan": "^1.5.2",
+    "react-hot-loader": "^4.0.0",
+    "webpack": "^4.0.1",
+    "webpack-dev-middleware": "^3.0.0",
+    "webpack-hot-middleware": "^2.21.2"
+  }
+}
