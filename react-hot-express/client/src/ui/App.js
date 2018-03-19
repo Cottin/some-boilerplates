@@ -1,5 +1,7 @@
 import React from 'react'
 
+import api from '../api'
+
 const getName = async () => {
   const res = await fetch('http://www.mocky.io/v2/5a9fa7df2e0000520074d138')
   const json = await res.json()
@@ -17,13 +19,24 @@ const Hello = ({name}) => (
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {name: '...'};
+    this.state = {name: '...', countries: []};
 
     getName().then(({hello}) => this.setState({name: hello}))
+
+    api.country.get().then((countries) => this.setState({countries}))
   }
   render() {
-    return <Hello name={this.state.name} />
+    return (
+      <div>
+        <Hello name={this.state.name} />
+        {this.state.countries.map(this.renderCountry)}
+      </div>
+    )
   }
+
+  renderCountry = (country) => (
+    <div key={country}>{country}</div>
+  )
 }
 
 export default App

@@ -8,6 +8,26 @@ const webpackConfig = require('./webpack.config.dev');
 
 app.use(require('morgan')('short'))
 
+var httpProxy = require('http-proxy');
+var apiProxy = httpProxy.createProxyServer();
+
+apiProxy.on('error', function (err, req, res) {
+  res.writeHead(500, {
+    'Content-Type': 'text/plain'
+  });
+
+  var msg = 'proxy error in server.js. Probably backend is not deployed yet?'
+  console.log('###############################################################')
+  console.log(msg)
+  res.end(msg);
+});
+
+
+app.all("/api/*", function(req, res) {
+  apiProxy.web(req, res, {target: process.env.SERVER});
+});
+
+
 
 // -----------------------------------------------------------------------------
 // Step 1: Create & configure a webpack compiler
@@ -26,6 +46,7 @@ app.use(require("webpack-hot-middleware")(compiler, {
   log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
 }))
 // -----------------------------------------------------------------------------
+
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + '/index.html')
