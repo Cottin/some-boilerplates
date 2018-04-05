@@ -31,3 +31,8 @@ Feels hard to keep up with latest things. Just thought I'd keep an index of tech
 * **express**: **v4** don't know difference but using latest. Also express-promise-router + async / await is nice when doing REST
 
 * **coffeescript**: **v2** when using coffee, no need for babel as long as node is resent.
+
+
+## TODOS:
+
+* move .babelrc into webpack config ?
