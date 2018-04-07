@@ -1,12 +1,13 @@
 React = require 'react'
 { hot } = require 'react-hot-loader'
+{ Provider: FelaProvider } = require 'react-fela'
 
-_ = require './renderer'
+felaRenderer = require './felaRenderer'
 Body = require './Body'
 
 
 App = ->
-	_ {s: 'w100 bglime'},
-		_ Body
+	React.createElement FelaProvider, {renderer: felaRenderer},
+		React.createElement Body
 
 module.exports = hot(module)(App)

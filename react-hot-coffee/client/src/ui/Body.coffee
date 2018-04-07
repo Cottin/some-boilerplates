@@ -15,7 +15,7 @@ sleep = (ms) ->
 	new Promise (res) -> setTimeout(res, ms)
 
 Hello = ({name}) ->
-	_ 'h1', {}, "Hello #{name}!!!"
+	_ 'h1', {s: 'bglime'}, "Hello #{name}!!!"
 
 class Body extends React.Component
 	constructor: (props) ->
