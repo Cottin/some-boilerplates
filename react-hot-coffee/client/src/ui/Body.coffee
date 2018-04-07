@@ -15,7 +15,7 @@ sleep = (ms) ->
 	new Promise (res) -> setTimeout(res, ms)
 
 Hello = ({name}) ->
-	_ 'h1', {}, "Hello #{name}!!"
+	_ 'h1', {}, "Hello #{name}!!!"
 
 class Body extends React.Component
 	constructor: (props) ->
@@ -38,7 +38,7 @@ class Body extends React.Component
 
 
 renderCountry = (country) ->
-	_ {key: country}, country + '!!'
+	_ {key: country}, country + '!!!!'
 
 
 module.exports = Body
