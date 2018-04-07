@@ -38,7 +38,7 @@ class Body extends React.Component
 
 
 renderCountry = (country) ->
-	_ {key: country}, country + '!!!!'
+	_ {key: country}, country + '!!!!!'
 
 
 module.exports = Body
