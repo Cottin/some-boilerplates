@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Boilerplate",
   "scripts": {
+    "start": "node server.js",
     "start:multientry": "WEBPACK_CONFIG=./webpack.config.multientry.js node server.js"
   },
   "author": "Victor Cottin <victor@wecodebetter.se> (http://www.wecodebetter.se/)",
