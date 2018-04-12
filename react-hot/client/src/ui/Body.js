@@ -21,7 +21,8 @@ class Body extends React.Component {
   constructor(props) {
     super(props)
     this.state = {name: '...', countries: []};
-
+  }
+  componentDidMount() {
     getName().then(({hello}) => this.setState({name: hello}))
 
     api.country.get().then((countries) => this.setState({countries}))

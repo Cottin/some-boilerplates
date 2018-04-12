@@ -6,7 +6,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
+  mode: 'development',
   entry: ['./src/index'],
+  devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -21,6 +23,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
