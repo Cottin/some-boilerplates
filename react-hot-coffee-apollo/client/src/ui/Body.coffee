@@ -22,7 +22,7 @@ PersonList = withRouter ({url}) ->
 				}
 			}
 			"""
-		variables: {sort: url.sort}
+		variables: {sort: url.sort || 'name'}
 	,
 		({ loading, error, data }) ->
 			if loading then return _ {}, 'Loading...'
