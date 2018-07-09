@@ -1,6 +1,6 @@
 module.exports = """
 	type Query { 
-		persons: [Person]
+		persons(sort: String!): [Person]
 		companies: [Company]
 	}
 

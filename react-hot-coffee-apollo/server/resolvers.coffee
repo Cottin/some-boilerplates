@@ -1,4 +1,4 @@
-{values} = require 'ramda' #auto_require:ramda
+{prop, sort, sortBy, values} = require 'ramda' #auto_require:ramda
 {fmap, fmapObjIndexed} = require 'ramda-extras' #auto_require:ramda-extras
 
 companies =
@@ -19,5 +19,7 @@ denormList = (xs, mapping, data) -> fmap xs, (x) -> denorm x, mapping, data
 
 module.exports =
 	Query:
-		persons: () -> denormList values(persons), {company: 'companies'}, {companies}
+		persons: (_, {sort}) ->
+			list = denormList values(persons), {company: 'companies'}, {companies}
+			sortBy prop(sort), list
 		companies: () -> values companies
