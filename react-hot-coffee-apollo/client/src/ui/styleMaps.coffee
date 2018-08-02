@@ -1,11 +1,16 @@
-{__, match, merge, nth, reduce, split} = require 'ramda' #auto_require:ramda
+{__, match, merge, nth, reduce, split, test, type} = require 'ramda' #auto_require:ramda
 {cc} = require 'ramda-extras'
 
 _ERR = 'StyleMap-error: '
 
+
 f = (x) ->
 	ret = {}
-	[_, family, size, color, weight] = match /^([a-z_])([\d_]{1,2})([a-z_]{2,3})([\d_])/, x
+	if type(x) != 'String' then throw new Error _ERR + "font expected type string, given: #{x}"
+	
+	RE = /^([a-z_])([\d]{1,2}|_)([a-z]{2,3}|__)([\d_])?$/
+	if ! test RE, x then throw new Error _ERR + "Invalid string given for font: #{x}"
+	[_, family, size, color, weight] = match RE, x
 
 	switch family
 		when 'o' then ret.fontFamily = "'Open Sans', sans-serif"
@@ -37,8 +42,10 @@ f = (x) ->
 		when '__' then # no-op
 		else throw new Error _ERR + "invalid color '#{color}' for t: #{x}"
 
-	if weight != '_'
-		ret.fontWeight = parseInt(weight) * 100
+	switch weight
+		when '_' then # noop
+		when undefined then # noop
+		else ret.fontWeight = parseInt(weight) * 100
 
 	return ret
 
@@ -50,8 +57,33 @@ grey = '#F8F8F5'
 blue = '#25AAED'
 darkBlue = '#284F63'
 
-bg = (x) ->
-	switch x
+mix = (x) ->
+	mixins = split ' ', x
+	mergeM = (mem, m) -> merge mem, _mixins(m)
+	reduce mergeM, {}, mixins
+
+_mixins = (m) ->
+	switch m
+
+		when 'h1'
+			':hover':
+				background: '#E2F2FA' 
+				'> div': 
+					background: '#E2F2FA' 
+
+		when 'h2'
+			':hover':
+				background: '#386379' 
+				boxShadow: '0 1px 1px 0 rgba(0,0,0,0.65)'
+				'> a': 
+					color: '#FFFFFF'
+				'> div': 
+					color: '#FFFFFF'
+					'> svg': 
+						fill: '#FFFFFF' 
+				'> svg': 
+					fill: '#FFFFFF' 
+
 		# base
 		when 'be'
 			background: beige
@@ -87,37 +119,9 @@ bg = (x) ->
 		when 'blue' then backgroundColor: 'blue'
 		when 'lightblue' then backgroundColor: 'lightblue'
 		when undefined then {}
-		else throw new Error _ERR + "invalid background '#{x}'"
-
-mix = (x) ->
-	mixins = split ' ', x
-	mergeM = (mem, m) -> merge mem, _mixins(m)
-	reduce mergeM, {}, mixins
-
-_mixins = (m) ->
-	switch m
-
-		when 'h1'
-			':hover':
-				background: '#E2F2FA' 
-				'> div': 
-					background: '#E2F2FA' 
-
-		when 'h2'
-			':hover':
-				background: '#386379' 
-				boxShadow: '0 1px 1px 0 rgba(0,0,0,0.65)'
-				'> a': 
-					color: '#FFFFFF'
-				'> div': 
-					color: '#FFFFFF'
-					'> svg': 
-						fill: '#FFFFFF' 
-				'> svg': 
-					fill: '#FFFFFF' 
 
 		else throw new Error _ERR + "invalid mixin '#{m}'"
 
 
 #auto_export:none_
-module.exports = {f, beige, lightBeige, white, grey, blue, darkBlue, bg, mix}
+module.exports = {f, beige, lightBeige, white, grey, blue, darkBlue, mix}

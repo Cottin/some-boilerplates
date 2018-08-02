@@ -31,6 +31,6 @@
     "react-fela": "^7.2.0",
     "react-functional-router": "^0.2.0",
     "react-hot-loader": "^4.0.0-beta.22",
-    "shortstyle": "^0.1.18"
+    "shortstyle": "^0.1.23"
   }
 }

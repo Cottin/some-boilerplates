@@ -36,7 +36,7 @@ PersonList = withRouter ({url}) ->
 				fmap data.persons, (p) -> _ Person, {key: p.id, person: p}
 
 Person = ({person}) ->
-	_ {s: 'm0_0_20_0 bglime'},
+	_ {s: 'm0_0_20_0 _lime'},
 		_ {}, person.name
 		_ {}, person.position
 		_ {}, person.company?.name
